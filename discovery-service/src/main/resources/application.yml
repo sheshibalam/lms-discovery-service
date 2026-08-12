@@ -1,0 +1,22 @@
+server:
+  port: 8761 # Standard Eureka default port
+
+spring:
+  application:
+    name: discovery-server
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    # Eureka Server should not try to register with itself
+    register-with-eureka: false
+    # Eureka Server should not try to fetch registry from external instances
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+  server:
+    # Prevents instances from being evicted too quickly during local testing network delays
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 3000
